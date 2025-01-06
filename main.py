@@ -21,7 +21,7 @@ async def main():
     intents = discord.Intents.all()
 
     bot = commands.Bot(
-        command_prefix=None,  # 僅使用 Slash Commands
+        command_prefix="",
         intents=intents
     )
 
@@ -30,6 +30,7 @@ async def main():
         print(f"Logged in as {bot.user}")
         try:
             synced = await bot.tree.sync()
+            await bot.tree.sync(guild=discord.Object(id=1122098259981254688))
             print(f"已同步 {len(synced)} 個指令。")
         except Exception as e:
             print(f"同步指令時發生錯誤: {e}")
@@ -47,4 +48,7 @@ async def main():
     await bot.start(token)
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        logging.info("Bot 已關閉。")
