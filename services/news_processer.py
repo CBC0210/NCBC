@@ -48,11 +48,12 @@ async def process_yahoo_news(bot):
     # Define the retention period (5 days)
     retention_period = timedelta(days=NEWS_MEMORY)
     current_time = datetime.now()
+
+    ### 這裡的程式碼需要修改，應該要使用try，然後嘗試不同格式的解析方式，如果全部不行則寫入目前時間 ###
     # Filter out old news
     def parse_published_date(date_str):
         date_str = date_str.replace("下午", "PM").replace("上午", "AM")
         return datetime.strptime(date_str, "%Y年%m月%d日 %p%I:%M")
-
     news_memory = [news for news in news_memory if parse_published_date(news["published"]) >= current_time - retention_period]
     # Save the filtered news memory
     await asyncio.to_thread(save_json, news_memory_file, news_memory)
