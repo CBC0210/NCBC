@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 DATA_FOLDER = "data"
 FORUM_CHANNELS_FILE = os.path.join(DATA_FOLDER, "forum_channels.json")
 
-async def main():
+async def main_discord_loop():
     load_dotenv()
     token = os.getenv("DISCORD_TOKEN")
     if not token:
@@ -48,8 +48,11 @@ async def main():
 
     await bot.start(token)
 
-if __name__ == "__main__":
+def main():
     try:
-        asyncio.run(main())
+        asyncio.run(main_discord_loop())
     except KeyboardInterrupt:
         logging.info("Bot 已關閉。")
+
+if __name__ == "__main__":
+    main()
