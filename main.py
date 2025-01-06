@@ -21,8 +21,9 @@ async def main():
     intents = discord.Intents.all()
 
     bot = commands.Bot(
-        command_prefix="",
-        intents=intents
+        command_prefix="    ",
+        intents=intents,
+        heartbeat_timeout=60  # Increase the heartbeat timeout to 60 seconds
     )
 
     @bot.event
@@ -42,8 +43,8 @@ async def main():
             json.dump({}, f, ensure_ascii=False, indent=2)
 
     # 載入 Cogs
-    # 將檔案路徑或常數傳給 Cog，讓它自己去處理 JSON
     await bot.load_extension("cogs.forum_config_cog")
+    await bot.load_extension("cogs.news_scheduler")
 
     await bot.start(token)
 

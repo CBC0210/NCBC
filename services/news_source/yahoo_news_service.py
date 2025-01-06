@@ -8,7 +8,7 @@ TEMP_NEWS_FILE = os.path.join(DATA_FOLDER, "temp_news.json")
 
 YAHOO_NEWS_URL = "https://tw.news.yahoo.com"  # Yahoo奇摩新聞首頁
 
-def fetch_yahoo_news_and_save():
+def fetch_yahoo_news():
     """
     1) 從 Yahoo奇摩新聞首頁抓取 HTML
     2) 解析新聞標題與連結
@@ -44,7 +44,8 @@ def fetch_yahoo_news_and_save():
             "title": title,
             "link": link,
             "published": hot_data["published"],
-            "content": hot_data["content"]
+            "content": hot_data["content"],
+            "images": hot_data["images"]
         })
 
     # 這裡根據你提供的原始碼，新聞似乎出現在 <li class="Pos(r) Lh(1.5) H(24px) Mb(8px)"> 裡
@@ -70,12 +71,14 @@ def fetch_yahoo_news_and_save():
         article_data = fetch_article_content(link)
         published_time = article_data["published"]
         content_text = article_data["content"]
+        images = article_data["images"]
 
         news_item = {
             "title": title,
             "link": link,
             "published": published_time,
-            "content": content_text
+            "content": content_text,
+            "images": images
         }
         all_news.append(news_item)
 
@@ -87,8 +90,8 @@ def fetch_yahoo_news_and_save():
 
 def fetch_article_content(url: str) -> dict:
     """
-    給定新聞連結，嘗試以 requests + BeautifulSoup 爬取內文。
-    回傳一個包含 'published' 與 'content' 的字典 (如抓不到則給預設值)。
+    給定新聞連結，嘗試以 requests + BeautifulSoup 爬取內文與圖片。
+    回傳一個包含 'published', 'content' 與 'images' 的字典 (如抓不到則給預設值)。
     """
     try:
         headers = {
@@ -108,19 +111,26 @@ def fetch_article_content(url: str) -> dict:
         time_tag = soup.find("time", class_="caas-attr-meta-time")
         published_time = time_tag.get_text(strip=True) if time_tag else "無發布時間"
 
+        # 嘗試抓取圖片
+        images = []
+        meta_tags = soup.find_all("meta", {"property": "og:image"})
+        for meta in meta_tags:
+            image_url = meta.get("content")
+            if image_url and not image_url.endswith(".ico"):
+                images.append(image_url)
+
         print(f"抓取內文成功: {url}")
         # 只取前 1000 字，避免過長
         return {
             "published": published_time,
-            "content": content_text[:1000]
+            "content": content_text[:1000],
+            "images": images
         }
 
     except Exception as e:
         print(f"抓取內文失敗: {url}, 錯誤: {e}")
         return {
             "published": "無發布時間",
-            "content": ""
+            "content": "",
+            "images": []
         }
-    except Exception as e:
-        print(f"抓取內文失敗: {url}, 錯誤: {e}")
-        return ""

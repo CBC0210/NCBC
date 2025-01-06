@@ -1,8 +1,9 @@
 py-cord>=2.3.0
 python-dotenv==1.0.0
-openai==0.27.0
+openai
 requests==2.28.1
 beautifulsoup4==4.11.1
 feedparser
 requests
 googlenewsdecoder
+numpy
