@@ -71,7 +71,7 @@ async def fetch_recent_posts(bot, channel_id: int, days: int = NEWS_MEMORY) -> L
     print(f"已抓取頻道 {channel_id} 過去 {days} 天內的 {len(posts)} 則貼文。")
     return posts
 
-async def process_forum_posts(all_news, bot, days: int = 5):
+async def process_forum_posts(all_news, bot, days: int = NEWS_MEMORY):
     """
     處理所有論壇頻道的貼文。
     包含：
