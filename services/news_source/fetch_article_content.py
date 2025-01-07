@@ -2,6 +2,7 @@ import os
 import json
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 def fetch_article_content(url: str) -> dict:
     """
@@ -24,7 +25,17 @@ def fetch_article_content(url: str) -> dict:
 
         # 嘗試抓取時間
         time_tag = soup.find("time", class_="caas-attr-meta-time")
-        published_time = time_tag.get_text(strip=True) if time_tag else "無發布時間"
+        published_time = time_tag.get_text(strip=True) if time_tag else "no time"
+        if published_time == "no time":
+            time_tag = soup.find("time")
+            published_time = time_tag["datetime"] if time_tag else "no time"
+        if published_time != "no time":
+            try:
+                dt = datetime.strptime(published_time, "%Y-%m-%dT%H:%M:%SZ")
+                published_time = dt.strftime("%Y年%m月%d日 %p%I:%M").replace("AM", "上午").replace("PM", "下午")
+            except ValueError:
+                pass
+        
 
         # 嘗試抓取圖片
         images = []

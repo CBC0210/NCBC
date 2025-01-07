@@ -60,7 +60,7 @@ async def fetch_recent_posts(bot, channel_id: int, days: int = NEWS_MEMORY) -> L
     
     since = (await get_since(days))
     posts = []
-    threads = channel.threads
+    threads = channel.threads[:100]  # 只取得前 100 則 threads
     try:
         for thread in threads:
             if thread.created_at > since:

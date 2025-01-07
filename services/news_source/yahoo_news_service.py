@@ -41,6 +41,8 @@ def fetch_yahoo_news():
         if link.startswith("/"):
             link = YAHOO_NEWS_URL + link
         hot_data = fetch_article_content(link)
+        if hot_data["content"] == "":
+            continue
         all_news.append({
             "title": title,
             "link": link,

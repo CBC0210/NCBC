@@ -45,6 +45,8 @@ def fetch_baha_news():
 
         # 3) 嘗試抓取內文
         article_data = fetch_article_content(link)
+        if article_data["content"] == "":
+            continue
         published_time = article_data["published"]
         content_text = article_data["content"]
         images = article_data["images"]

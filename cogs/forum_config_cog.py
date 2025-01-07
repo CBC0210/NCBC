@@ -49,7 +49,7 @@ class ForumConfigCog(commands.Cog):
                 discord.ForumTag(name="評論與見解"),
                 discord.ForumTag(name="未來趨勢"),
                 discord.ForumTag(name="迷因與趣味"),
-                discord.ForumTag(name="隨機話題"),
+                discord.ForumTag(name="氣象天氣"),
                 discord.ForumTag(name="投票"),
                 discord.ForumTag(name="娛樂新聞"),
             ]
