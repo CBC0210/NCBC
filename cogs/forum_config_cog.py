@@ -35,7 +35,7 @@ class ForumConfigCog(commands.Cog):
                 discord.ForumTag(name="公告"),
                 discord.ForumTag(name="運動新聞"),
                 discord.ForumTag(name="電玩遊戲"),
-                discord.ForumTag(name="新聞報導"),
+                discord.ForumTag(name="校園生活"),
                 discord.ForumTag(name="時事討論"),
                 discord.ForumTag(name="科技動態"),
                 discord.ForumTag(name="政治討論"),
