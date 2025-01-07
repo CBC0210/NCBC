@@ -7,3 +7,4 @@ feedparser
 requests
 googlenewsdecoder
 numpy
+discord.py
