@@ -48,7 +48,7 @@ async def fetch_recent_posts(bot, channel_id: int, days: int = NEWS_MEMORY) -> L
     Args:
         bot (discord.Bot): Discord Bot 實例。
         channel_id (int): 目標頻道的 ID。
-        days (int, optional): 多少天內的貼文。預設為 5 天。i
+        days (int, optional): 多少天內的貼文。預設為 5 天。
     
     Returns:
         List[discord.Message]: 過去指定天數內的貼文列表。
@@ -60,14 +60,15 @@ async def fetch_recent_posts(bot, channel_id: int, days: int = NEWS_MEMORY) -> L
     
     since = (await get_since(days))
     posts = []
-    threads = channel.threads[:100]  # 只取得前 100 則 threads
-    try:
-        for thread in threads:
-            if thread.created_at > since:
-                posts.append(thread)
-    except Exception as e:
-        print(f"抓取頻道 {channel_id} 貼文時發生錯誤: {e}")
+    threads = channel.threads  # Remove the parentheses to access the list of threads
+    for thread in threads:
+        last_message_time = thread.last_message.created_at if thread.last_message else thread.created_at
+        if thread.archived or (len(thread.members) <= 1 and (datetime.now(tz_utc_plus_8) - last_message_time).days > 1):
+            await thread.delete()
+        else:
+            posts.append(thread)
     
+    posts = posts[:100]
     print(f"已抓取頻道 {channel_id} 過去 {days} 天內的 {len(posts)} 則貼文。")
     return posts
 

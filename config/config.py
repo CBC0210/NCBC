@@ -1,8 +1,11 @@
 import os
 from dotenv import load_dotenv
+import discord
 
 load_dotenv()  # 載入 .env 檔案中的環境變數
 
+# 版本
+VERSION = "1.1.0"
 # 單位：秒，代表新聞自動更新間隔
 NEWS_FETCH_INTERVAL = 1800
 # 單位：天，代表新聞記憶保留期限
@@ -15,6 +18,37 @@ SIMILARITY_THRESHOLD = 0.65
 DATA_FOLDER = "data"
 # 論壇頻道設定檔案路徑
 FORUM_CHANNELS_FILE = os.path.join(DATA_FOLDER, "forum_channels.json")
+
+# 論壇頻道設定
+NCBC_DISCRIPTION = ("歡迎來到NCBC新聞臺！\n\n"
+                   "這裡專注於收集和分享經過篩選的新聞內容。"
+                   "CBC 不喜歡那些吸引點擊但內容空洞的農場標題和文章，因此在這裡，你會看到經過轉換和整理的高質量新聞。"
+                   "\n我們致力於提供清晰、直接的新聞報導，不包含多餘的內容。"
+                   "在這裡，你可以和其他成員一起討論時事，分享觀點，增進理解。"
+                   "\n我也會和大家分享我的看法。"
+                   "\n別再説「宅宅不懂時事」了。NCBC希望每位成員都能輕鬆掌握最新的社會動態，提升你的時事敏感度。")
+NCBC_FORUM_TAGS = [
+                discord.ForumTag(name="公告"),
+                discord.ForumTag(name="運動新聞"),
+                discord.ForumTag(name="電玩遊戲"),
+                discord.ForumTag(name="校園生活"),
+                discord.ForumTag(name="時事討論"),
+                discord.ForumTag(name="科技動態"),
+                discord.ForumTag(name="政治討論"),
+                discord.ForumTag(name="經濟分析"),
+                discord.ForumTag(name="健康資訊"),
+                discord.ForumTag(name="環保話題"),
+                discord.ForumTag(name="文化藝術"),
+                discord.ForumTag(name="星座運勢"),
+                discord.ForumTag(name="資源分享"),
+                discord.ForumTag(name="深入分析"),
+                discord.ForumTag(name="評論與見解"),
+                discord.ForumTag(name="未來趨勢"),
+                discord.ForumTag(name="迷因與趣味"),
+                discord.ForumTag(name="氣象天氣"),
+                discord.ForumTag(name="投票"),
+                discord.ForumTag(name="娛樂新聞"),
+            ]
 
 # 評論員prompt和index
 COMMENTATOR_PROMPT = [

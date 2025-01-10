@@ -5,7 +5,7 @@ from discord import app_commands
 
 # 從 utils/json_utils.py 匯入
 from utils.json_utils import load_json, save_json
-from config.config import FORUM_CHANNELS_FILE
+from config.config import FORUM_CHANNELS_FILE, NCBC_DISCRIPTION, NCBC_FORUM_TAGS
 
 class ForumConfigCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -22,37 +22,26 @@ class ForumConfigCog(commands.Cog):
         save_json(FORUM_CHANNELS_FILE, self.forum_channels_data)
 
     async def initialize_channel(self, channel: discord.ForumChannel):
+        """初始化論壇頻道。"""
+        existing_tags = {tag.name: tag for tag in channel.available_tags}
+        new_tags = {tag.name: tag for tag in NCBC_FORUM_TAGS}
+
+        # Remove tags that are not in the new_tags
+        for tag_name in list(existing_tags.keys()):
+            if tag_name not in new_tags:
+                await channel.delete_tag(existing_tags[tag_name])
+
+        # Add new tags that are not in the existing_tags
+        for tag_name, tag in new_tags.items():
+            if tag_name not in existing_tags:
+                await channel.create_tag(name=tag.name)
+
+        # Update the available_tags with the new tags
+        # updated_tags = [tag for tag in channel.available_tags if tag.name in new_tags]
         await channel.edit(
             name="NCBC新聞臺",
-            topic=("歡迎來到NCBC論壇！\n\n"
-                   "這裡專注於收集和分享經過篩選的新聞內容。"
-                   "CBC 不喜歡那些吸引點擊但內容空洞的農場標題和文章，因此在這裡，你會看到經過轉換和整理的高質量新聞。"
-                   "\n我們致力於提供清晰、直接的新聞報導，不包含多餘的內容。"
-                   "在這裡，你可以和其他成員一起討論時事，分享觀點，增進理解。"
-                   "\n我也會和大家分享我的看法。"
-                   "\n別再説「宅宅不懂時事」了。NCBC希望每位成員都能輕鬆掌握最新的社會動態，提升你的時事敏感度。"),
-            available_tags=[
-                discord.ForumTag(name="公告"),
-                discord.ForumTag(name="運動新聞"),
-                discord.ForumTag(name="電玩遊戲"),
-                discord.ForumTag(name="校園生活"),
-                discord.ForumTag(name="時事討論"),
-                discord.ForumTag(name="科技動態"),
-                discord.ForumTag(name="政治討論"),
-                discord.ForumTag(name="經濟分析"),
-                discord.ForumTag(name="健康資訊"),
-                discord.ForumTag(name="環保話題"),
-                discord.ForumTag(name="文化藝術"),
-                discord.ForumTag(name="星座運勢"),
-                discord.ForumTag(name="資源分享"),
-                discord.ForumTag(name="深入分析"),
-                discord.ForumTag(name="評論與見解"),
-                discord.ForumTag(name="未來趨勢"),
-                discord.ForumTag(name="迷因與趣味"),
-                discord.ForumTag(name="氣象天氣"),
-                discord.ForumTag(name="投票"),
-                discord.ForumTag(name="娛樂新聞"),
-            ]
+            topic=NCBC_DISCRIPTION,
+            default_layout=discord.ForumLayoutType.gallery_view
         )
     @app_commands.command(name="remove_forum_channel", description="從機器人的使用列表中移除論壇頻道")
     @app_commands.describe(channel="要移除的論壇頻道")

@@ -32,10 +32,24 @@ def fetch_yahoo_news():
     # 2) 解析 HTML，找出新聞列表
     soup = BeautifulSoup(resp.text, "html.parser")
     hot_tags = soup.select("li._yb_1y70zwh._yb_su6olx a")
+    # Load existing news memory
+    news_memory_file = os.path.join(DATA_FOLDER, "news_memory.json")
+    try:
+        with open(news_memory_file, "r", encoding="utf-8") as f:
+            news_memory = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        news_memory = []
+
+    if not isinstance(news_memory, list):
+        news_memory = []
+
+    # Extract titles from news memory for filtering
+    existing_titles = {news["title"] for news in news_memory}
+
     for a_tag in hot_tags:
         title_div = a_tag.find("div", class_="_yb_3cjtcc")
         title = title_div.get_text(strip=True) if title_div else None
-        if not title:
+        if not title or title in existing_titles:
             continue
         link = a_tag["href"].strip()
         if link.startswith("/"):
@@ -62,6 +76,10 @@ def fetch_yahoo_news():
             continue
 
         title = a_tag.get_text(strip=True)
+        
+        if not title or title in existing_titles:
+            continue
+        
         link = a_tag["href"].strip()
 
         # 若連結是相對路徑，補上 https://tw.news.yahoo.com

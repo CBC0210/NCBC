@@ -33,9 +33,24 @@ def fetch_gamer_news():
     # 2) 解析 HTML，找出新聞列表
     soup = BeautifulSoup(resp.text, "html.parser")
     news_items = soup.select("div h4 a")
+    # Load existing news memory
+    news_memory_file = os.path.join(DATA_FOLDER, "news_memory.json")
+    try:
+        with open(news_memory_file, "r", encoding="utf-8") as f:
+            news_memory = json.load(f)
+    except FileNotFoundError:
+        news_memory = []
+
+    if not isinstance(news_memory, list):
+        news_memory = []
+
+    existing_titles = {news["title"] for news in news_memory}
 
     for news_item in news_items:
         title = news_item.get_text(strip=True)
+        # Filter out news that are already in memory
+        if title in existing_titles:
+            continue
         link = news_item["href"].strip()
         if not link.startswith("https://"):
             link = "https://www.4gamers.com.tw" + link

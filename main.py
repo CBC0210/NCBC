@@ -60,6 +60,9 @@ async def main_discord_loop():
         except (discord.ConnectionClosed, discord.GatewayNotFound, discord.InvalidSession, discord.HTTPException) as e:
             print(f"Connection error: {e}. Reconnecting in 5 seconds...")
             await asyncio.sleep(5)
+        except KeyboardInterrupt:
+            await bot.close()
+            break
 
 def main():
     try:
