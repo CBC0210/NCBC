@@ -76,21 +76,21 @@ async def process_yahoo_news(bot):
     
     for news in all_news:
         news["embed_title"] = await asyncio.to_thread(get_text_embedding, news["title"])
-    for news in all_news:
-        merged_news = []
+    merged_news = []
+    if len(all_news) >= 2:
         for i, news in enumerate(all_news):
             if news in merged_news:
                 continue
             for j in range(i + 1, len(all_news)):
                 other_news = all_news[j]
-            if other_news not in merged_news:
-                similarity = await asyncio.to_thread(compare_embeddings, news['embed_title'], other_news["embed_title"])
-                if similarity:
-                    news["title"] += "\n" + other_news["title"]
-                    news["content"] += "\n" + other_news["content"]
-                    news["link"] += "\n" + other_news["link"]
-                    news["images"].extend(other_news["images"])
-                    merged_news.append(other_news)
+                if other_news not in merged_news:
+                    similarity = await asyncio.to_thread(compare_embeddings, news['embed_title'], other_news["embed_title"])
+                    if similarity:
+                        news["title"] += "\n" + other_news["title"]
+                        news["content"] += "\n" + other_news["content"]
+                        news["link"] += "\n" + other_news["link"]
+                        news["images"].extend(other_news["images"])
+                        merged_news.append(other_news)
     all_news = [news for news in all_news if news not in merged_news]
 
     # Process the news content

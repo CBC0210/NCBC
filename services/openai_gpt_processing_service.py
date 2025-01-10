@@ -1,7 +1,7 @@
 # services/openai_processing_service.py
 from openai import OpenAI
 import os
-from config.config import OPENAI_API_KEY, COMMENTATOR_PROMPT, COMMENTATOR_INDEX
+from config.config import OPENAI_API_KEY, COMMENTATOR_PROMPT, COMMENTATOR_INDEX, STATUS_PROMPT
 import json
 from typing import List
 import discord
@@ -196,6 +196,59 @@ def determine_tags(tags: List[discord.ForumTag], content: str) -> List[str]:
     except Exception as e:
         print(f"生成標籤時發生錯誤: {e}")
         return []
+
+def generate_discord_status(title: str) -> str:
+    """
+    使用 OpenAI GPT-4o mini 模型生成適合寫在 Discord 狀態中的話。
+    
+    Args:
+        title (str): 新聞標題。
+    
+    Returns:
+        str: 生成的 Discord 狀態。
+    """
+    prompt = STATUS_PROMPT
+    
+    try:
+        converted = openai_client.chat.completions.create(
+            model=MODEL,
+            messages=[
+                {"role": "developer", "content": prompt},
+                {
+                    "role": "user",
+                    "content": f"新聞標題:\n13縣市低溫特報 雲林以北防跌破10°C"
+                },
+                {
+                    "role": "assistant",
+                    "content": f"好冷"
+                },
+                {
+                    "role": "user",
+                    "content": f"新聞標題:\n北市中山區民宅凌晨竄火苗　警消獲報急灌救"
+                },
+                {
+                    "role": "assistant",
+                    "content": f"北市燒起來了（物理）"
+                },
+                {
+                    "role": "user",
+                    "content": f"新聞標題:\n魔力藍加盟富邦悍將 2024年球季將回歸中華職棒"
+                },
+                {
+                    "role": "assistant",
+                    "content": f"魔力藍回來了！"
+                },
+                {
+                    "role": "user",
+                    "content": f"新聞標題:\n{title}"
+                },
+            ]
+        )
+        discord_status = converted.choices[0].message.content.strip()
+        return discord_status
+    except Exception as e:
+        print(f"生成 Discord 狀態時發生錯誤: {e}")
+        return "正在玩 拼命寫稿的機器人生"  # 回傳預設狀態作為備援
 
 def process_news_file(input_file: str, output_file: str):
     """

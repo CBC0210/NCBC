@@ -51,6 +51,7 @@ async def main_discord_loop():
             json.dump({}, f, ensure_ascii=False, indent=2)
 
     # 載入 Cogs
+    await bot.load_extension("cogs.status_cog")
     await bot.load_extension("cogs.forum_config_cog")
     await bot.load_extension("cogs.news_scheduler")
 
