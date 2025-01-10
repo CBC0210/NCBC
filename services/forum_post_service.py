@@ -60,6 +60,8 @@ async def fetch_recent_posts(bot, channel_id: int, days: int = NEWS_MEMORY) -> L
     
     since = (await get_since(days))
     posts = []
+    async for thread in channel.archived_threads(limit=100):
+        await thread.delete()
     threads = channel.threads  # Remove the parentheses to access the list of threads
     for thread in threads:
         last_message_time = thread.last_message.created_at if thread.last_message else thread.created_at

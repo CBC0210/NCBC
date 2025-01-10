@@ -20,9 +20,10 @@ DATA_FOLDER = "data"
 FORUM_CHANNELS_FILE = os.path.join(DATA_FOLDER, "forum_channels.json")
 
 # 論壇頻道設定
-NCBC_DISCRIPTION = ("歡迎來到NCBC新聞臺！\n\n"
+NCBC_DISCRIPTION = ("歡迎來到NCBC新聞臺！"
+                    "版本 " + VERSION + "\n\n"
                    "這裡專注於收集和分享經過篩選的新聞內容。"
-                   "CBC 不喜歡那些吸引點擊但內容空洞的農場標題和文章，因此在這裡，你會看到經過轉換和整理的高質量新聞。"
+                   "CBC 不喜歡那些吸引點擊且內容空洞的農場標題和文章，因此在這裡，你會看到經過轉換和整理的高質量新聞。"
                    "\n我們致力於提供清晰、直接的新聞報導，不包含多餘的內容。"
                    "在這裡，你可以和其他成員一起討論時事，分享觀點，增進理解。"
                    "\n我也會和大家分享我的看法。"

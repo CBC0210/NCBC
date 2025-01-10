@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "title": "NVIDIA Avatar Cloud Engine讓NPC與Boss理解玩家意圖，《PUBG絕地求生》、《永劫無間》確定採用",
+    "link": "https://www.4gamers.com.tw/news/detail/69509/nvidia-launches-avatar-cloud-engine-ai-technology",
+    "published": "2025年01月10日 上午03:45",
+    "content": "\n\nNVIDIA 在 CES 2025 上發表了多樣化的 AI 應用，在遊戲領域除了 DLSS 4 外，還將 Avatar Cloud Engine 技術導入到遊戲的 NPC 角色之中，讓其能夠理解玩家的語音、攻擊策略，創造更活靈活現的自動化演出，並確認《絕地求生》、《永劫無間》、《inZOI》等多款遊戲將會引入此技術。\n\nNVIDIA Avatar Cloud Engine（簡稱 NVIDIA ACE）最早於 2023 年的時候發表，透過導入生成式 AI 語言模型，能夠讓 NPC 角色具備天馬行空的聊天功能，讓對話不再只局限於特定的文本選項。\n\n而在今年 CES 2025 上，NVIDIA 擴大這項技術的應用，讓其能夠實現除了對話以外的場景，並套用到多種不同用途 NPC 角色身上，例如電腦隊友、敵方 Boss，甚至是路人 NPC 等。\n\n\n透過替這些 NPC 角色導入新的 NVIDIA ACE 小型語言模型，讓它們可以能夠模擬出真人的行為規劃，還能額外疊加影像、聲音的模型，讓這些角色能夠感知環境、支援語音輸入，使玩家透過自然語言來指揮 NPC，當然也能用於敵方角色，使其能夠即時分析出玩家戰略，擺脫公式化刷怪。\n\n目前 NVIDIA ACE 技術已經有多款遊戲宣布採用，在已經上市的遊戲中，《絕地求生》（PUBG: BATTLEGROUNDS）、《永劫無間》（NARAKA:BLADEPOINT）會在未來更新中導入對應的功能，提供電腦輔助隊友，並可以用麥克風命令要求協助尋找特定資源、掩護、輔助攻擊等操作。\n\n\n\n而在還未上市的遊戲上，《inZOI》、《傳奇 5》 （Mira 5）、《Dead Meat》、《AI People》、《動物龐克》（ZooPunk）、《異形：無序侵入》（Alien:Rogue Incursion）、《珠仙》（World of Jade Dynasty）也都將採用對應技術來實現多樣化的玩法。\n\n像是為韓版模擬市民的《inZOI》會在引入 Smart Zoi 角色，在部分路人 NPC 中利用 NVIDIA ACE 實現與身邊事件的主動化互動，玩家還能鎖定觀察 Smart Zoi，得知 NPC 在行動過程中的想法。\n\n\n《傳奇 5》 （Mira 5）選擇利用 NVIDIA ACE 放到遊戲 Boss 身上，讓遊戲變得更有挑戰性，敵人會得知每一位玩家所",
+    "images": [
+      "https://img.4gamers.com.tw/news-image/add98366-9807-4a24-8986-c30499afb3dd.jpg"
+    ]
+  }
+]
