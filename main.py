@@ -21,9 +21,9 @@ async def main_discord_loop():
     intents = discord.Intents.all()
 
     bot = commands.Bot(
-        command_prefix="    ",
+        command_prefix="!CBC",
         intents=intents,
-        heartbeat_timeout=60  # Increase the heartbeat timeout to 60 seconds
+        heartbeat_timeout=120  # Increase the heartbeat timeout to 120 seconds
     )
 
     @bot.event
@@ -36,6 +36,14 @@ async def main_discord_loop():
         except Exception as e:
             print(f"同步指令時發生錯誤: {e}")
 
+    @bot.event
+    async def on_disconnect():
+        print("Bot disconnected. Attempting to reconnect...")
+
+    @bot.event
+    async def on_resumed():
+        print("Bot reconnected.")
+
     # 建立 data/ 資料夾、forum_channels.json 檔案 (若不存在)
     os.makedirs(DATA_FOLDER, exist_ok=True)
     if not os.path.exists(FORUM_CHANNELS_FILE):
@@ -46,7 +54,12 @@ async def main_discord_loop():
     await bot.load_extension("cogs.forum_config_cog")
     await bot.load_extension("cogs.news_scheduler")
 
-    await bot.start(token)
+    while True:
+        try:
+            await bot.start(token)
+        except (discord.ConnectionClosed, discord.GatewayNotFound, discord.InvalidSession, discord.HTTPException) as e:
+            print(f"Connection error: {e}. Reconnecting in 5 seconds...")
+            await asyncio.sleep(5)
 
 def main():
     try:

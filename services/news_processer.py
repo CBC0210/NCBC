@@ -8,6 +8,7 @@ from config.config import NEWS_MEMORY
 from services.openai_gpt_processing_service import clean_content, generate_new_title, generate_new_content, generate_summary_as_critic
 from services.forum_post_service import process_forum_posts
 import asyncio
+from services.openai_embed_service import get_text_embedding, compare_embeddings
 
 DATA_FOLDER = "data"
 TEMP_NEWS_FILE = os.path.join(DATA_FOLDER, "temp_news.json")
@@ -65,16 +66,38 @@ async def process_yahoo_news(bot):
     # Save the filtered news memory
     await asyncio.to_thread(save_json, news_memory_file, news_memory)
 
+
+    # Clean the news content
+    print("Clean news content...")
     for item in all_news:
         item['content'] = await asyncio.to_thread(clean_content, item['content'])
         item['title'] = await asyncio.to_thread(generate_new_title, item['title'], item['content'])
+        print()
+    
+    for news in all_news:
+        news["embed_title"] = await asyncio.to_thread(get_text_embedding, news["title"])
+    for news in all_news:
+        merged_news = []
+        for i, news in enumerate(all_news):
+            if news in merged_news:
+                continue
+            for j in range(i + 1, len(all_news)):
+                other_news = all_news[j]
+            if other_news not in merged_news:
+                similarity = await asyncio.to_thread(compare_embeddings, news['embed_title'], other_news["embed_title"])
+                if similarity:
+                    news["title"] += "\n" + other_news["title"]
+                    news["content"] += "\n" + other_news["content"]
+                    news["link"] += "\n" + other_news["link"]
+                    news["images"].extend(other_news["images"])
+                    merged_news.append(other_news)
+    all_news = [news for news in all_news if news not in merged_news]
+
+    # Process the news content
+    print("Process news content...")
+    for item in all_news:
         item['content'] = await asyncio.to_thread(generate_new_content, item['content'])
         item['comment'] = await asyncio.to_thread(generate_summary_as_critic, item['title'], item['content'])
         print()
 
     await process_forum_posts(all_news, bot)
-
-# 可選：定義後續處理函式，例如發送到 Discord 頻道
-# def send_to_discord(news: Dict[str, str]):
-#     # 實作發送消息到特定 Discord 頻道的邏輯
-#     pass

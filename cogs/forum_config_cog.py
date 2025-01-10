@@ -43,7 +43,7 @@ class ForumConfigCog(commands.Cog):
                 discord.ForumTag(name="健康資訊"),
                 discord.ForumTag(name="環保話題"),
                 discord.ForumTag(name="文化藝術"),
-                discord.ForumTag(name="問題與解答"),
+                discord.ForumTag(name="星座運勢"),
                 discord.ForumTag(name="資源分享"),
                 discord.ForumTag(name="深入分析"),
                 discord.ForumTag(name="評論與見解"),
@@ -54,7 +54,31 @@ class ForumConfigCog(commands.Cog):
                 discord.ForumTag(name="娛樂新聞"),
             ]
         )
+    @app_commands.command(name="remove_forum_channel", description="從機器人的使用列表中移除論壇頻道")
+    @app_commands.describe(channel="要移除的論壇頻道")
+    @app_commands.guild_only()
+    async def remove_forum_channel(self, interaction: discord.Interaction, channel: discord.ForumChannel):
+        """只有管理員可使用，將論壇頻道ID從JSON中移除。"""
+        if not interaction.user.guild_permissions.administrator:
+            await interaction.response.send_message("你沒有管理員權限，無法使用此指令。", ephemeral=True)
+            return
 
+        guild_id_str = str(interaction.guild_id)
+        
+        # 檢查頻道是否存在於該guild中
+        if guild_id_str not in self.forum_channels_data or channel.id not in self.forum_channels_data[guild_id_str]:
+            await interaction.response.send_message(f"論壇頻道 {channel.mention} 不在列表中。", ephemeral=True)
+            return
+
+        # 移除 ID
+        self.forum_channels_data[guild_id_str].remove(channel.id)
+        await self.save_forum_channels()  # 寫檔
+
+        await interaction.response.send_message(
+            f"已將論壇頻道 {channel.mention} (ID: {channel.id}) 從紀錄中移除。",
+            ephemeral=True
+        )
+        
     @app_commands.command(name="add_forum_channel", description="將論壇頻道給機器人使用，已經被使用的頻道會被初始化")
     @app_commands.describe(channel="要加入的論壇頻道")
     @app_commands.guild_only()

@@ -1,5 +1,32 @@
 [
   {
+    "title": "SIE公開「午夜黑」 PlayStation Portal、DualSense Edge等一系列PS5周邊",
+    "link": "https://www.4gamers.com.tw/news/detail/69443/new-midnight-black-collection",
+    "published": "2025年01月07日 下午01:30",
+    "content": "\n\nPlayStation 今日公開了一系列的「午夜黑」 PS5 周邊。\n\n\n其中包括了可替換多部為零件的高階控制器 DualSense Edge，雲端掌機 PlayStation Portal，入耳式耳機 PULSE Explore wireless earbuds，以及頭戴式耳機  PULSE Elite wireless headset 共四樣產品。\n\n美國 SIE 表示這些商品將於 1 月 16 日開放預定，預計於 2 月 20 日推出。台灣發售日至本篇截稿前還有待公布，若有公布將修改本文。\nTags:#PS5周邊#DualSenseEdge#PlayStationPortal#真無線耳機#藍牙耳機#無線耳機\n科技硬體",
+    "images": [
+      "https://img.4gamers.com.tw/news-image/918b87c2-2b0e-4fce-9b08-d664989cd441.jpg"
+    ]
+  },
+  {
+    "title": "萬策盡！百合動畫《恰如細語般的戀歌》藍光確定停止發行",
+    "link": "https://www.4gamers.com.tw/news/detail/69440/whisper-me-a-love-song--blu-ray-release-officially-canceled",
+    "published": "2025年01月07日 上午11:07",
+    "content": "\n\n竹嶋えく漫畫作品《恰如細語般的戀歌》（ささやくように恋を唄う）改編電視動畫於今（7）日宣布終止發售藍光第 1 到 4 卷，於各通路預定的觀眾將依該通路規定進行退款作業。\n\n劇情描述小高一生「木野陽鞠」在新生歡迎會上對代班主唱「朝凪依」一見鍾情，過沒多久陽鞠以驚人的行動力迅速向依表明自己的心意。由於活潑的陽鞠實在是太可愛了，依在接受告白後也對陽鞠產生好感。彼此都喜歡著對方，心中的感覺卻微妙地不同⋯⋯\n\n《恰如細語般的戀歌》動畫 2024 年 4 月起開播後，經常出現作畫崩壞場面，更因製作排程等因素停播多次，連帶影響到藍光發售日期，甚至動畫製作公司 CLOUD HEARTS 的官網連結在 2024 年 10 月左右就失效。直到 12 月底，第 11、12 話歷經半年終於公開。\n\n\n\n另一方面，《恰如細語般的戀歌》真人舞台版雖於 2024 年 7 月～8 月日本地區演出完畢，但隨著製作公司 Trifle Entertainment 在 11 月停業，真人舞台版的 Blu-ray 和 DVD 也連帶停止製作。\nTags:#GL#恰如細語般的戀歌#動畫#2024年春番#青春校園\n影劇動漫",
+    "images": [
+      "https://img.4gamers.com.tw/news-image/09862bb3-11d9-440b-9e74-9bb00c8f21fe.jpg"
+    ]
+  },
+  {
+    "title": "NVIDIA Project DIGITS迷你電腦AI性能超猛，售US$3000起",
+    "link": "https://www.4gamers.com.tw/news/detail/69442/nvidia-announces-project-digits",
+    "published": "2025年01月07日 上午11:00",
+    "content": "\n\nNVIDIA 在 CES 2025 推出了一個名為 Project DIGITS 的有趣迷你電腦，尺寸如同 Apple Mac Mini，卻擁有高達 1 PetaFLOP 的 AI 效能。\n\n\n\nProject DIGITS 的主要運算晶片為 GB10 超級晶片，它透過 NVLink-C2C 在晶片封裝內串連了自家當前最新的 Blackwell GPU，以及由聯發科生產的 Arm 架構 20 核心 Grace CPU。在 FP4 精度下，GB10 可提供高達 1 PetaFLOP 的 AI 效能。\n\nProject DIGITS 內部還搭載 NVIDIA ConnectX 網卡，可串聯兩台 Project DIGITS。\n\n\n\n別看 Project DIGITS 小小一台，它的造型幾乎與 NVIDIA DGX 伺服器如出一轍，甚至還都具備串聯機制，簡直就是桌上型的迷你伺服器。如此精巧的外型，每位資料科學家、AI 研究人員與學生的桌上都可輕鬆裝設一台 AI 超級電腦。\n\nTags:#NVIDIA#GPU#CES#CES2025\n影劇動漫",
+    "images": [
+      "https://img.4gamers.com.tw/news-image/c05f43a9-cabc-4f38-9530-0ab7fcea5cae.jpg"
+    ]
+  },
+  {
     "title": "NVIDIA在發表會上沒說的事，GeForce RTX 50系列採PCIe 5.0介面、支援DisplayPort 2.1",
     "link": "https://www.4gamers.com.tw/news/detail/69441/nvidia-rtx-50-series-support-pcie-5-and-dp21",
     "published": "2025年01月07日 上午10:53",
@@ -99,15 +126,6 @@
     ]
   },
   {
-    "title": "NVIDIA GeForce RTX 50系列筆電GPU登場，RTX 5070仍可實現RTX 4090效能卻只需一半功耗",
-    "link": "https://www.4gamers.com.tw/news/detail/69431/nvidia-launches-blackwell-geforce-rtx-50-series-laptop-gpu",
-    "published": "2025年01月07日 上午07:00",
-    "content": "\n\n除了 GeForce RTX 50 系列 GPU 桌上型顯卡，NVIDIA 於 CES 2025 同步推出 GeForce RTX 50 系列筆電 GPU，同樣也涵蓋 RTX 5090 / RTX 5080 / RTX 5070 Ti / RTX 5070 等 4 款型號，預計自 2025 年 3 月起陸續上市。\n\n\n\n筆電版本的 GPU 規模較桌上型顯卡稍有壓縮，畢竟機身尺寸要能符合大眾滿意的薄度。執行長黃仁勳仍宣稱可達 RTX 4090 筆電 GPU 的性能水平，但只需要一半的功耗，配備 128-bit 的 8 GB GDDR7 記憶體，整機售 US$ 1,299 起。\n\n稍高一階的 RTX 5070 Ti 筆電 GPU 規模較 RTX 5070 筆電 GPU 提升約 25%，記憶體也擴大至 192-bit 的 12 GB GDDR7 記憶體，整機售 US$ 1,599 起。\n\nRTX 5080 筆電 GPU 規模來到 RTX 5070 Ti 筆電 GPU 的 1.3 倍，記憶體則配 256-bit 的 16 GB GDDR7 記憶體，整機售 US$ 2,199 起。\n\n最高規的 RTX 5090 筆電 GPU 規模來到 RTX 5080 筆電 GPU 的 1.37 倍，記憶體再擴大到 384-bit 的 24 GB GDDR7，整機售 US$ 2,899 起。\n\nTags:#NVIDIA#RTX5090#RTX5080#RTX5070Ti#RTX5070#Blackwell#GeForce#GeForceRTX#GPU#電競筆電#CES#CES2025\n科技硬體",
-    "images": [
-      "https://img.4gamers.com.tw/news-image/2828859a-df49-4c48-a794-a5c3a3d087d2.jpg"
-    ]
-  },
-  {
     "title": "3A大作帶著走，MSI Claw A1M龍之爪掌機讓你隨時隨地都開玩！",
     "link": "https://www.4gamers.com.tw/news/detail/69406/msi-claw-a1m-handheld-gaming-console-hand-on-review",
     "published": "2025年01月07日 上午06:02",
@@ -174,7 +192,7 @@
     "title": "發售不到兩年，2K Games正式關閉《WWE 2K23》多人遊戲伺服器",
     "link": "https://www.4gamers.com.tw/news/detail/69422/2k-sunsets-wwe-2k23",
     "published": "2025年01月07日 上午04:31",
-    "content": "\n\n2K Games 於 1 月 6 日關閉摔角動作《WWE 2K23》線上伺服器，雖然仍可用離線模式遊玩單機內容，但線上比賽、社群創作等服務均停止運作。該系列目前僅剩《WWE 2K24》還有線上功能，《WWE 2K25》還沒發表。\n\n《WWE 2K》系列主打逼真寫實的摔角動作、栩栩如生的角色創作，並操作 WWE（世界摔角娛樂）的明星選手與朋友大打一場。\n\n本次《WWE 2K23》關服在預料當中，卻提醒玩家遊戲的使用期限十分短暫，購買電玩遊戲並非「擁有」而是「租借」授權。\n\n《WWE 2K23》於 2023 年 3 月 17 日發售，2K Games 於 2024 年 9 月宣布將在 11 月 1 日停止販售遊戲本體和虛擬貨幣，預計 2025 年 1 月 26 日關閉《WWE 2K23》線上伺服器，結果提前跳票在昨日下線。\n\n\n\n這並非《WWE 2K》系列首次提前關服，《WWE 2K22》於 2022 年 3 月 11 日推出，2K Games 一次性關閉幾乎所有前代遊戲的伺服器，結果《WWE 2K22》也在不到兩年的時間內、2024 年 1 月 3 日關閉伺服器。\n\n此舉顯示 2K Games 在新作推出後的經營策略，完全不放線上營運資源在舊作，也反映出遊戲業普遍存在的伺服器生命週期問題，無法維持長期的可玩性，導致在遊戲發售中後期令新進玩家望之卻步。\n\n根據 SteamDB 統計，《WWE 2K23》自 2024 年中以來，Steam 同上就維持數百人的低水位，雖然遊戲伺服器下線後仍可玩單機內容，仍有 Steam 玩家忍不住批評官方逼大家每年花錢買新作，卻端不出像樣的革命性內容與全新體驗。\n\n《WWE 2K23》和《WWE 2K24》均在各自年份的 1 月正式發表，並於隔年 3 月推出，按照這個循環，2K Games 將在近期內推出《WWE 2K25》，屆時離《WWE 2K24》的離線模式也不遠了。\n\n\nTags:#2KGames#WWE2K23#WWE2K24#Steam#職業摔角\n遊戲資訊",
+    "content": "\n\n2K Games 於 1 月 6 日關閉摔角動作《WWE 2K23》線上伺服器，雖然仍可用離線模式遊玩單機內容，但線上比賽、社群創作等服務均停止運作。該系列目前僅剩《WWE 2K24》還有線上功能，《WWE 2K25》1 月 28 日才會釋出發售消息。\n\n《WWE 2K》系列主打逼真寫實的摔角動作、栩栩如生的角色創作，並操作 WWE（世界摔角娛樂）的明星選手與朋友大打一場。\n\n本次《WWE 2K23》關服在預料當中，卻提醒玩家遊戲的使用期限十分短暫，購買電玩遊戲並非「擁有」而是「租借」授權。\n\n《WWE 2K23》於 2023 年 3 月 17 日發售，2K Games 於 2024 年 9 月宣布將在 11 月 1 日停止販售遊戲本體和虛擬貨幣，預計 2025 年 1 月 26 日關閉《WWE 2K23》線上伺服器，結果提前跳票在昨日下線。\n\n\n\n這並非《WWE 2K》系列首次提前關服，《WWE 2K22》於 2022 年 3 月 11 日推出，2K Games 一次性關閉幾乎所有前代遊戲的伺服器，結果《WWE 2K22》也在不到兩年的時間內、2024 年 1 月 3 日關閉伺服器。\n\n此舉顯示 2K Games 在新作推出後的經營策略，完全不放線上營運資源在舊作，也反映出遊戲業普遍存在的伺服器生命週期問題，無法維持長期的可玩性，導致在遊戲發售中後期令新進玩家望之卻步。\n\n根據 SteamDB 統計，《WWE 2K23》自 2024 年中以來，Steam 同上就維持數百人的低水位，雖然遊戲伺服器下線後仍可玩單機內容，仍有 Steam 玩家忍不住批評官方逼大家每年花錢買新作，卻端不出像樣的革命性內容與全新體驗。\n\n《WWE 2K23》和《WWE 2K24》均在各自年份的 1 月正式發表，並於隔年 3 月推出，按照這個循環，2K Games 推測將在近期推出《WWE 2K25》，離《WWE 2K24》改離線模式的日子也不遠了。\n\n\nTags:#2KGames#WWE2K23#WWE2K24#Steam#職業摔角\n遊戲資訊",
     "images": [
       "https://img.4gamers.com.tw/news-image/4c9dc0e1-5342-4af0-95cb-2626a4a6055f.jpg"
     ]
@@ -195,31 +213,6 @@
     "content": "\n\n日本演藝經紀公司 LDH JAPAN 宣布開設全新品牌「LDH Animation」，主要業務是與動畫公司共同進行製作、企劃+版權業務、擴大數位領域等。\n\nLDH JAPAN 是放浪兄弟（EXILE）6 名初期成員於 2002 年 10 月 17 日出資成立的公司，旗下藝人包含了歌手、演員、模特兒領域，例如 EXILE TRIBE、E.G.family、MIYAVI、町田啓太、鹽野瑛久等。\n\n「LDH Animation」的目標是製作原創、由漫畫／小說改編的動畫，以另一旗下企業 LDH DIGITAL 的 CG 技術力為基礎，強化自主創作能力。而在企劃方面，有經手過 BATTLE OF TOKYO  超東京拡張展等活動的經驗，在動畫領域上可望擔任製作委員會成員、主題歌曲製作出資、角色與作品授權拓展、商品化等。\n\nLDH DIGITAL 過去作品以旗下藝人的音樂 MV 為主。隨著 LDH Animation 的成立，原先的 LDH DIGITAL 已於 2025 年 1 月 1 日與 LDH JAPAN 合併，動畫與 CG 製作由 LDH Animation 承接。\n\n\n該品牌的顧問陣容有星野康二（曾任華特迪士尼日本分部、吉卜力工作室總經理）、茨木政彥（曾任《週刊少年 Jump》第八代總編輯、《Jump SQ》初代總編輯、集英社常務董事）。\nTags:#產業#動畫\n影劇動漫",
     "images": [
       "https://img.4gamers.com.tw/news-image/6bca1a02-cf23-4a22-a2de-56eff594c752.jpg"
-    ]
-  },
-  {
-    "title": "極好評像素塔防《地牢戰爭3》Steam開張，打造致命陷阱迎接冒險者浪潮",
-    "link": "https://www.4gamers.com.tw/news/detail/69419/dungeon-warfare-3-will-launch-on-steam-in-2025",
-    "published": "2025年01月07日 上午03:22",
-    "content": "\n\n獨立團隊 Valsar 開發 2D 像素塔防系列最新作《Dungeon Warfare 3》（暫譯，地牢戰爭 3）登陸 Steam 平台，預計 2025 年內發售，提供簡體中文介面與字幕。\n\n《地牢戰爭 3》延續極度好評的兩款前作設計，玩家作為地下城的主人為了保衛「神秘領地」，必須鋪設各式地形、機關板塊、開闢危險路徑，打造完美融合混亂與痛苦的試煉場，以抵禦無盡湧來的冒險者浪潮。\n\n三代的武器庫比以往更致命，提供更多摧毀、擊潰和誤導敵人的方法，每種陷阱和裝置都能升級與調整，成功防守後的經驗值，能用於永久強化陷阱威力，或解鎖強大的新能力。\n\nYour browser does not support the video tag.\n\n《地牢戰爭3》的敵人更加多樣化，陷阱與地形之間會產生「協同」作用，玩家可探索不同組合發揮奇效，在敵人來襲時靈活應對，並透過精緻的符文系統，在程式生成、從未重複的地下城挑戰各種難度。\n\n\n\n\n\n\n\n\n此外，「無盡模式」會帶來無止盡的敵人浪潮，玩家能將防禦推至極限、爭奪高分，成為迷宮塑造者的傳奇。\n\n「享受精緻的像素藝術、氛圍感十足的音效設計、流暢的操作體驗，讓您的邪惡地牢，令敵人哀號栩栩如生！」\n\n《地牢戰爭3》預計 2025 年在 Steam 平台發售，感興趣的玩家可先納入願望清單。\n\n\nTags:#DungeonWarfare3#像素風#Steam#輕度Rogue#塔防#策略遊戲\n影劇動漫",
-    "images": [
-      "https://img.4gamers.com.tw/news-image/6b8085a1-b17f-4108-9b1b-942a6d998101.jpg"
-    ]
-  },
-  {
-    "title": "迎新年！三麗鷗、卡娜赫拉「金蛇年SuperCard紅包悠遊卡」兩波開賣時間曝光",
-    "link": "https://www.4gamers.com.tw/news/detail/69418/sanrio-kanahei-supercard-year-of-the-snake",
-    "published": "無發布時間",
-    "content": "",
-    "images": []
-  },
-  {
-    "title": "驚奇4超人來了！《漫威爭鋒》S1賽季「驚奇先生&隱形女」率先登場，點名削弱鷹眼和海拉遠程決鬥者",
-    "link": "https://www.4gamers.com.tw/news/detail/69415/marvel-rivals-season-1-info-release",
-    "published": "2025年01月07日 上午02:47",
-    "content": "\n\n由網易 NetEase Games 團隊與漫威聯合打造的《漫威爭鋒》（Marvel Rivals）將在 1 月正式推出第一賽季「永夜降臨」（Eternal Night Falls），預計帶來 4 位全新的漫威英雄加入戰場，「驚奇4超人」（The Fantastic 4）。\n\n根據宣傳片，而第一賽季的背景主題描述奇異博士被困在糾纏異界，德古拉與末日博士的陰謀，兩人聯手擾亂月球軌道，並打算在紐約市釋放吸血鬼大軍，而 4 名英雄「驚奇4超人」挺身而出。\n\n\n雖然尚未有具體的更新說明，不過創意總監陳廣雲在最新的開發者影片對外宣布第一賽季的概況。\n\n首先，1 月 11 日啟動的第一賽季將維期 3 個月，不過會分為前後兩部份，每一段約六周與七周的時間。前半賽季會先推出「驚奇4超人」驚奇先生與隱形女，並且加入新的地圖「永夜城中心帝國」，以及新的「末日對決」模式。\n\n同時，陳總監提及 S1 戰鬥通行證將帶來 10 種新造型等獎勵，購買需花費 990 晶格，完成通行證可獲得 600 晶格。\n\n\n\n而影片後半，首席戰鬥設計師劉志勇上來解釋第一賽季的英雄改動，率先登場的驚奇先生與隱形女定位分別是決鬥家與策略家，前者可利用身體的變化造成不俗的戰鬥輸出，後者則有護盾可保護隊友。\n\n而提到改動，第 0 賽季護盾與遠程英雄成為主流 Meta，尤其是遠程攻擊的決鬥者相當強勢，因此在前半賽季劉設計師點名像鷹眼與海拉等英雄會有削弱調整，同時提及美國隊長、猛毒、金鋼狼、暴風女、斗篷與匕首等英雄會獲得增強，以展現他們戰場上的定位。\n\n\n\n《漫威爭鋒》（Marvel Rivals）第一賽季「永夜降臨」預定在太平洋標準時間 1 月 10 日上午 1 點正式推出，台灣時間應為 1 月 11 日下午改版。\n\n\nTags:#漫威爭鋒MarvelRivals#免費遊戲#Steam#PS5遊戲#XboxSeries遊戲#改版情報#網易\n遊戲資訊",
-    "images": [
-      "https://img.4gamers.com.tw/news-image/ae19b7ad-8790-4d65-9a98-4e7c48dded18.jpg"
     ]
   }
 ]

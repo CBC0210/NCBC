@@ -178,6 +178,10 @@ def determine_tags(tags: List[discord.ForumTag], content: str) -> List[str]:
             messages=[
                 {"role": "developer", "content": prompt},
                 {
+                    "role": "assistant",
+                    "content": '["標籤1", "標籤2", "標籤3"]'
+                },
+                {
                     "role": "user",
                     "content": (
                         f"標籤列表:\n{tag_list_str}\n\n內文:\n{content}"

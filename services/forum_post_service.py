@@ -90,13 +90,25 @@ async def process_forum_posts(all_news, bot, days: int = NEWS_MEMORY):
         print("沒有找到任何論壇頻道需要處理。")
         return
     
-    for news in all_news:
-        news["embed_title"] = await asyncio.to_thread(get_text_embedding, news["title"])
 
     for channel_id in channel_ids:
         channel = bot.get_channel(channel_id)
         if channel is None:
             print(f"無法找到頻道 ID: {channel_id}")
+            # 刪除 forum_channels.json 中的該頻道
+            try:
+                with open(FORUM_CHANNELS_FILE, "r+", encoding="utf-8") as f:
+                    data = json.load(f)
+                    for guild_id, channels in data.items():
+                        if channel_id in channels:
+                            channels.remove(channel_id)
+                            break
+                    f.seek(0)
+                    f.truncate()
+                    json.dump(data, f, ensure_ascii=False, indent=4)
+                print(f"已刪除 forum_channels.json 中的頻道 ID: {channel_id}")
+            except Exception as e:
+                print(f"刪除 forum_channels.json 中的頻道 ID 時發生錯誤: {e}")
             continue
 
         posts = await fetch_recent_posts(bot, channel_id, days)
