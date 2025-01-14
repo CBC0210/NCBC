@@ -5,9 +5,9 @@ import discord
 load_dotenv()  # 載入 .env 檔案中的環境變數
 
 # 版本
-VERSION = "1.2.0"
+VERSION = "1.3.0"
 # 單位：秒，代表新聞自動更新間隔
-NEWS_FETCH_INTERVAL = 1800
+NEWS_FETCH_INTERVAL = 7200
 # 單位：天，代表新聞記憶保留期限
 NEWS_MEMORY = 2
 # OpenAI API Key

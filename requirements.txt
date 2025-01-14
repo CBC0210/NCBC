@@ -8,3 +8,4 @@ requests
 googlenewsdecoder
 numpy
 discord.py
+tiktoken

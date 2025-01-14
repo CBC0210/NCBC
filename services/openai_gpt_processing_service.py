@@ -5,10 +5,22 @@ from config.config import OPENAI_API_KEY, COMMENTATOR_PROMPT, COMMENTATOR_INDEX,
 import json
 from typing import List
 import discord
+import tiktoken
 
 # 設定 OpenAI API Key
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
 MODEL = "gpt-4o-mini"
+
+# Initialize the tokenizer
+enc = tiktoken.encoding_for_model(MODEL)
+
+def print_token_count(prompt: str, user_content: str):
+    messages = [
+        {"role": "developer", "content": prompt},
+        {"role": "user", "content": user_content}
+    ]
+    token_count = sum(len(enc.encode(message["content"])) for message in messages)
+    print(f"Estimated token count: {token_count}")
 
 def clean_content(content: str) -> str:
     """
@@ -25,6 +37,8 @@ def clean_content(content: str) -> str:
         "其他部分維持原文。"
         "除此之外不要輸出其他内容。"
     )
+    
+    print_token_count(prompt, content)
     
     try:
         converted = openai_client.chat.completions.create(
@@ -60,6 +74,15 @@ def generate_new_title(original_title: str, content: str) -> str:
         "新標題應該能夠提供足夠的資訊，並且避免使用誇張或吸引點擊的詞語。"
     )
     
+    user_content = (
+        "\n\n原標題:\n"
+        f"{original_title}"
+        "\n\n內文:\n"
+        f"{content}"
+    )
+    
+    print_token_count(prompt, user_content)
+    
     try:
         converted = openai_client.chat.completions.create(
             model=MODEL,
@@ -67,12 +90,7 @@ def generate_new_title(original_title: str, content: str) -> str:
                 {"role": "developer", "content": prompt},
                 {
                     "role": "user",
-                    "content": (
-                            "\n\n原標題:\n"
-                            f"{original_title}"
-                            "\n\n內文:\n"
-                            f"{content}"
-                        )
+                    "content": user_content
                 }
             ]
         )
@@ -99,6 +117,8 @@ def generate_new_content(content: str) -> str:
         "重要的詳細資訊仍然要保留，但是可以用分行或簡化或Discord可以渲染的方式呈現。"
         "除此之外不要輸出其他内容。"
     )
+    
+    print_token_count(prompt, content)
     
     try:
         converted = openai_client.chat.completions.create(
@@ -132,6 +152,12 @@ def generate_summary_as_critic(title: str, content: str) -> str:
         str: 生成的評論家描述。
     """
     prompt = COMMENTATOR_PROMPT[COMMENTATOR_INDEX]
+    
+    user_content = (
+        f"標題:\n{title}\n\n內文:\n{content}"
+    )
+    
+    print_token_count(prompt, user_content)
 
     try:
         converted = openai_client.chat.completions.create(
@@ -140,9 +166,7 @@ def generate_summary_as_critic(title: str, content: str) -> str:
                 {"role": "developer", "content": prompt},
                 {
                     "role": "user",
-                    "content": (
-                        f"標題:\n{title}\n\n內文:\n{content}"
-                    )
+                    "content": user_content
                 }
             ]
         )
@@ -172,20 +196,20 @@ def determine_tags(tags: List[discord.ForumTag], content: str) -> List[str]:
     tag_names = [tag.name for tag in tags]
     tag_list_str = json.dumps(tag_names, ensure_ascii=False)
     
+    user_content = (
+        f"標籤列表:\n{tag_list_str}\n\n內文:\n{content}"
+    )
+    
+    print_token_count(prompt, user_content)
+    
     try:
         response = openai_client.chat.completions.create(
             model=MODEL,
             messages=[
                 {"role": "developer", "content": prompt},
                 {
-                    "role": "assistant",
-                    "content": '["標籤1", "標籤2", "標籤3"]'
-                },
-                {
                     "role": "user",
-                    "content": (
-                        f"標籤列表:\n{tag_list_str}\n\n內文:\n{content}"
-                    )
+                    "content": user_content
                 }
             ]
         )
@@ -208,6 +232,10 @@ def generate_discord_status(title: str) -> str:
         str: 生成的 Discord 狀態。
     """
     prompt = STATUS_PROMPT
+    
+    user_content = f"新聞標題:\n{title}"
+    
+    print_token_count(prompt, user_content)
     
     try:
         converted = openai_client.chat.completions.create(
@@ -240,7 +268,7 @@ def generate_discord_status(title: str) -> str:
                 },
                 {
                     "role": "user",
-                    "content": f"新聞標題:\n{title}"
+                    "content": user_content
                 },
             ]
         )
