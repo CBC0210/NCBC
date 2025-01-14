@@ -15,7 +15,7 @@ class StatusCog(commands.Cog):
     async def on_ready(self):
         self.change_status.start()
 
-    @tasks.loop(minutes=5)  # Change status every 5 minutes
+    @tasks.loop(minutes=60)  # Change status every 60 minutes
     async def change_status(self):
         news_memory_file = os.path.join(DATA_FOLDER, "news_memory.json")
         news_memory = await asyncio.to_thread(load_json, news_memory_file)
