@@ -12,8 +12,9 @@ NEWS_FETCH_INTERVAL = 7200
 NEWS_MEMORY = 2
 # OpenAI API Key
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")  # 確保在 .env 檔案中設定
-# 相似度閾值，用於比較向量相似度
-SIMILARITY_THRESHOLD = 0.65
+# 相似度閾值，用於比較向量相似度（僅於此設定）
+# 預設值：0.55
+SIMILARITY_THRESHOLD = 0.55
 # 資料檔案夾路徑
 DATA_FOLDER = "data"
 # 論壇頻道設定檔案路徑

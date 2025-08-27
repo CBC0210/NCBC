@@ -291,7 +291,8 @@ def process_news_file(input_file: str, output_file: str):
             news_data = json.load(infile)
         
         for item in news_data:
-            item['content'] = generate_new_content(item['title'],item['content'])
+            # generate_new_content accepts only the content; title is not required here
+            item['content'] = generate_new_content(item['content'])
         
         with open(output_file, 'w', encoding='utf-8') as outfile:
             json.dump(news_data, outfile, ensure_ascii=False, indent=4)

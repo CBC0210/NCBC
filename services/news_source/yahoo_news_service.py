@@ -86,9 +86,7 @@ def fetch_yahoo_news():
         if link.startswith("/"):
             link = YAHOO_NEWS_URL + link
 
-        # 嘗試抓取內文
-        content_text = fetch_article_content(link)
-
+        # 嘗試抓取內文（只呼叫一次）
         article_data = fetch_article_content(link)
         published_time = article_data["published"]
         content_text = article_data["content"]

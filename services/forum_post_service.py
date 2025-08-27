@@ -6,7 +6,7 @@ import discord
 import asyncio
 from datetime import datetime, timedelta, timezone
 
-from config.config import NEWS_MEMORY,DATA_FOLDER, FORUM_CHANNELS_FILE, SIMILARITY_THRESHOLD
+from config.config import NEWS_MEMORY,DATA_FOLDER, FORUM_CHANNELS_FILE
 from services.openai_embed_service import get_text_embedding, compare_embeddings
 from services.openai_gpt_processing_service import determine_tags
 
@@ -123,7 +123,9 @@ async def process_forum_posts(all_news, bot, days: int = NEWS_MEMORY):
 
             similar_news = []
             for news in all_news:
-                if await asyncio.to_thread(compare_embeddings, embed_title, news["embed_title"]) > SIMILARITY_THRESHOLD:
+                # compare_embeddings already applies the SIMILARITY_THRESHOLD and returns a boolean
+                is_similar = await asyncio.to_thread(compare_embeddings, embed_title, news["embed_title"])
+                if is_similar:
                     similar_news.append(news)
             for news in similar_news:
                 all_news.remove(news)
@@ -135,8 +137,8 @@ async def process_forum_posts(all_news, bot, days: int = NEWS_MEMORY):
                     await post.send(news['published'])
                     for image in news.get('images', []):
                         await post.send(image)
-                    await post.send(news['content']+"\n")
-                    await post.send("\n原文：" + news['link'])
+                    # 合併內容與原文連結為同一則訊息，用換行分隔
+                    await post.send(news['content'] + "\n原文：" + news['link'])
         
         for news in all_news:
             available_tags = channel.available_tags
@@ -148,8 +150,8 @@ async def process_forum_posts(all_news, bot, days: int = NEWS_MEMORY):
             for index, image in enumerate(news.get('images', [])):
                 if index != 0:
                     await thread.send(image)
-            await thread.send(news['content']+"\n")
-            await thread.send("原文：" + news['link'])
+            # 合併內容與原文連結為同一則訊息，用換行分隔
+            await thread.send(news['content'] + "\n原文：" + news['link'])
 
     print("所有論壇貼文處理完成。")
 

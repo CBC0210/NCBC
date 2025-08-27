@@ -1,0 +1,19 @@
+[Unit]
+Description=NCBC Discord News Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ncbc
+Group=ncbc
+WorkingDirectory=/opt/ncbc/NCBC
+Environment="PYTHONUNBUFFERED=1"
+EnvironmentFile=/opt/ncbc/NCBC/.env
+ExecStart=/opt/ncbc/NCBC/.venv/bin/python /opt/ncbc/NCBC/main.py
+Restart=on-failure
+RestartSec=5s
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target
