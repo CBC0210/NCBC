@@ -54,29 +54,36 @@ python -c "from dotenv import load_dotenv; load_dotenv(); import os; print('DISC
 sudo useradd -r -m -d /opt/ncbc -s /usr/sbin/nologin ncbc
 ```
 
-2) 放置專案到 `/opt/ncbc/NCBC`（或依實際情況調整路徑）：
+為什麼要建立專用使用者？
+- 最小權限原則：即使程式或金鑰外洩，被入侵時也只影響該使用者可存取的檔案。
+- 檔案權限清楚：`/opt/ncbc/NCBC` 與 `data/` 僅由 `ncbc` 讀寫，不需要 root 權限。
+- 日誌與服務隔離：方便問題排查與權限管理。
+
+2) 使用 git clone 部署程式碼到 `/opt/ncbc/NCBC`：
 ```bash
 sudo mkdir -p /opt/ncbc
-sudo chown -R $USER:$USER /opt/ncbc
-cp -r . /opt/ncbc/NCBC
+sudo chown -R ncbc:ncbc /opt/ncbc
+sudo -u ncbc bash -lc '
+cd /opt/ncbc
+git clone https://github.com/CBC0210/NCBC.git NCBC
+'
 ```
+若為私有倉庫，請改用 SSH 金鑰或個人存取權杖（PAT）。
 
-3) 建立服務專用虛擬環境並安裝依賴：
+3) 建立服務專用虛擬環境並安裝依賴（以 ncbc 身分）：
 ```bash
+sudo -u ncbc bash -lc '
 python3 -m venv /opt/ncbc/NCBC/.venv
-source /opt/ncbc/NCBC/.venv/bin/activate
-pip install -r /opt/ncbc/NCBC/requirements.txt
-deactivate
-sudo chown -R ncbc:ncbc /opt/ncbc/NCBC
+/opt/ncbc/NCBC/.venv/bin/pip install -r /opt/ncbc/NCBC/requirements.txt
+'
 ```
 
-4) 建立環境變數檔 `/opt/ncbc/NCBC/.env`（擁有者 `ncbc`、權限 600）：
+4) 建立環境變數檔 `/opt/ncbc/NCBC/.env`（擁有者 `ncbc`、權限 600），並確保資料資料夾可寫：
 ```bash
-sudo -u ncbc bash -c 'cat > /opt/ncbc/NCBC/.env <<EOF
+sudo -u ncbc bash -lc 'mkdir -p /opt/ncbc/NCBC/data'
+sudo -u ncbc bash -lc 'cat > /opt/ncbc/NCBC/.env <<EOF
 DISCORD_TOKEN=你的token
 OPENAI_API_KEY=你的key
-# 可選，未設定時預設 0.55
-SIMILARITY_THRESHOLD=0.5
 EOF
 chmod 600 /opt/ncbc/NCBC/.env'
 ```
@@ -115,6 +122,16 @@ sudo systemctl enable ncbc.service
 7) 檢視日誌：
 ```bash
 journalctl -u ncbc.service -f --no-pager
+```
+
+### 後續更新（git pull）
+```bash
+sudo -u ncbc bash -lc '
+cd /opt/ncbc/NCBC
+git pull
+/opt/ncbc/NCBC/.venv/bin/pip install -r requirements.txt
+'
+sudo systemctl restart ncbc.service
 ```
 
 ## 安全性注意事項
