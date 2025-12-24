@@ -1,0 +1,76 @@
+{
+  "server": {
+    "name": "shop-server",
+    "alias": "shop-server",
+    "hostname": "192.168.196.154",
+    "user": "cbc",
+    "port": 22,
+    "authentication": {
+      "type": "ssh_key",
+      "private_key": "~/.ssh/shop_server_key",
+      "public_key": "~/.ssh/shop_server_key.pub",
+      "password_required": false
+    },
+    "network": {
+      "zerotier_ip": "192.168.196.154",
+      "public_ip": "111.184.153.149",
+      "zerotier_network_id": "9e1948db6329396d"
+    },
+    "system": {
+      "os": "Ubuntu Server",
+      "hostname": "cbcserver",
+      "home_directory": "/home/cbc"
+    },
+    "sudo": {
+      "nopasswd": true,
+      "enabled": true
+    },
+    "ssh_config": {
+      "file": "~/.ssh/config",
+      "host_entry": "shop-server",
+      "settings": {
+        "HostName": "192.168.196.154",
+        "User": "cbc",
+        "IdentityFile": "~/.ssh/shop_server_key",
+        "IdentitiesOnly": "yes",
+        "ServerAliveInterval": 60,
+        "ServerAliveCountMax": 3,
+        "StrictHostKeyChecking": "accept-new"
+      }
+    },
+    "management_interfaces": {
+      "webmin": "https://192.168.196.154:10000",
+      "portainer": "https://192.168.196.154:9000"
+    }
+  },
+  "usage": {
+    "connect": "ssh shop-server",
+    "execute_single": "ssh shop-server \"command\"",
+    "execute_sudo": "ssh shop-server \"sudo command\"",
+    "execute_multiple": "ssh shop-server << 'EOF'\ncommand1\nsudo command2\ncommand3\nEOF",
+    "upload_file": "scp local_file shop-server:~/target_path/",
+    "download_file": "scp shop-server:~/file_path local_path",
+    "upload_directory": "scp -r local_directory shop-server:~/target_directory/",
+    "test_connection": "ssh shop-server \"echo '連線成功' && hostname && whoami\""
+  },
+  "common_operations": {
+    "system_status": "ssh shop-server \"uptime && free -h && df -h\"",
+    "service_status": "ssh shop-server \"sudo systemctl status service_name\"",
+    "service_restart": "ssh shop-server \"sudo systemctl restart service_name\"",
+    "service_logs": "ssh shop-server \"sudo journalctl -u service_name -n 50\"",
+    "file_view": "ssh shop-server \"cat ~/file_path\"",
+    "file_edit": "ssh shop-server \"nano ~/file_path\"",
+    "process_list": "ssh shop-server \"ps aux | grep keyword\"",
+    "system_resources": "ssh shop-server \"top -bn1 | head -20\""
+  },
+  "notes": {
+    "password_auth_disabled": true,
+    "key_auth_only": true,
+    "zerotier_required": true,
+    "detailed_docs": [
+      ".cursor/SSH_SERVER_OPERATION.md",
+      "pages/伺服器SSH配置.md"
+    ]
+  }
+}
+
