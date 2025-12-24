@@ -52,21 +52,27 @@ class ForumConfigCog(commands.Cog):
             await interaction.response.send_message("你沒有管理員權限，無法使用此指令。", ephemeral=True)
             return
 
-        guild_id_str = str(interaction.guild_id)
-        
-        # 檢查頻道是否存在於該guild中
-        if guild_id_str not in self.forum_channels_data or channel.id not in self.forum_channels_data[guild_id_str]:
-            await interaction.response.send_message(f"論壇頻道 {channel.mention} 不在列表中。", ephemeral=True)
-            return
+        try:
+            guild_id_str = str(interaction.guild_id)
+            
+            # 檢查頻道是否存在於該guild中
+            if guild_id_str not in self.forum_channels_data or channel.id not in self.forum_channels_data[guild_id_str]:
+                await interaction.response.send_message(f"論壇頻道 {channel.mention} 不在列表中。", ephemeral=True)
+                return
 
-        # 移除 ID
-        self.forum_channels_data[guild_id_str].remove(channel.id)
-        await self.save_forum_channels()  # 寫檔
+            # 移除 ID
+            self.forum_channels_data[guild_id_str].remove(channel.id)
+            await self.save_forum_channels()  # 寫檔
 
-        await interaction.response.send_message(
-            f"已將論壇頻道 {channel.mention} (ID: {channel.id}) 從紀錄中移除。",
-            ephemeral=True
-        )
+            await interaction.response.send_message(
+                f"已將論壇頻道 {channel.mention} (ID: {channel.id}) 從紀錄中移除。",
+                ephemeral=True
+            )
+        except Exception as e:
+            await interaction.response.send_message(
+                f"移除頻道時發生錯誤：{str(e)}",
+                ephemeral=True
+            )
         
     @app_commands.command(name="add_forum_channel", description="將論壇頻道給機器人使用，已經被使用的頻道會被初始化")
     @app_commands.describe(channel="要加入的論壇頻道")
@@ -77,32 +83,57 @@ class ForumConfigCog(commands.Cog):
             await interaction.response.send_message("你沒有管理員權限，無法使用此指令。", ephemeral=True)
             return
 
-        guild_id_str = str(interaction.guild_id)
-        # 檢查頻道是否存在於該guild中
-        channel_in_guild = interaction.guild.get_channel(channel.id)
-        if channel_in_guild is None:
-            await interaction.response.send_message("指定的頻道不存在於此伺服器。", ephemeral=True)
-            return
-        
-        # 初始化該guild的清單
-        if guild_id_str not in self.forum_channels_data:
-            self.forum_channels_data[guild_id_str] = []
+        # 先延遲回應以避免互動超時
+        await interaction.response.defer(ephemeral=True)
 
-        # 檢查是否已存在
-        if channel.id in self.forum_channels_data[guild_id_str]:
-            await interaction.response.send_message(f"論壇頻道 {channel.mention} 已在列表中。", ephemeral=True)
-            await self.initialize_channel(channel)  # 初始化頻道
-            return
+        try:
+            guild_id_str = str(interaction.guild_id)
+            # 檢查頻道是否存在於該guild中
+            channel_in_guild = interaction.guild.get_channel(channel.id)
+            if channel_in_guild is None:
+                await interaction.followup.send("指定的頻道不存在於此伺服器。", ephemeral=True)
+                return
+            
+            # 驗證頻道類型
+            if not isinstance(channel_in_guild, discord.ForumChannel):
+                await interaction.followup.send("指定的頻道不是論壇頻道。", ephemeral=True)
+                return
+            
+            # 初始化該guild的清單
+            if guild_id_str not in self.forum_channels_data:
+                self.forum_channels_data[guild_id_str] = []
 
-        # 新增 ID
-        self.forum_channels_data[guild_id_str].append(channel.id)
-        await self.initialize_channel(channel)  # 初始化頻道
-        await self.save_forum_channels()  # 寫檔
+            # 檢查是否已存在
+            if channel.id in self.forum_channels_data[guild_id_str]:
+                await interaction.followup.send(f"論壇頻道 {channel.mention} 已在列表中，正在重新初始化...", ephemeral=True)
+                try:
+                    await self.initialize_channel(channel)  # 初始化頻道
+                    await interaction.followup.send(f"論壇頻道 {channel.mention} 已重新初始化完成。", ephemeral=True)
+                except Exception as e:
+                    await interaction.followup.send(f"初始化頻道時發生錯誤：{str(e)}", ephemeral=True)
+                return
 
-        await interaction.response.send_message(
-            f"已將論壇頻道 {channel.mention} (ID: {channel.id}) 加入紀錄。",
-            ephemeral=True
-        )
+            # 新增 ID
+            self.forum_channels_data[guild_id_str].append(channel.id)
+            await self.save_forum_channels()  # 先寫檔
+            
+            # 初始化頻道（可能耗時較長）
+            await interaction.followup.send(f"正在初始化論壇頻道 {channel.mention}...", ephemeral=True)
+            try:
+                await self.initialize_channel(channel)  # 初始化頻道
+                await interaction.followup.send(
+                    f"已將論壇頻道 {channel.mention} (ID: {channel.id}) 加入紀錄並完成初始化。",
+                    ephemeral=True
+                )
+            except Exception as e:
+                # 如果初始化失敗，移除已加入的 ID
+                if channel.id in self.forum_channels_data[guild_id_str]:
+                    self.forum_channels_data[guild_id_str].remove(channel.id)
+                    await self.save_forum_channels()
+                await interaction.followup.send(f"初始化頻道時發生錯誤：{str(e)}", ephemeral=True)
+                
+        except Exception as e:
+            await interaction.followup.send(f"處理指令時發生未預期的錯誤：{str(e)}", ephemeral=True)
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(ForumConfigCog(bot))
